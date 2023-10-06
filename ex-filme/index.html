@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Meus Filmes Favoritos</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Meus Filmes</h1>
+        <div id="filmes-lista"></div>
+    </div>
+
+    <script>
+        const filmesData = {
+            "filmesFavoritos": [
+                {
+                    "titulo": "Corra",
+                    "diretor": "Jordan Peele",
+                    "genero": ["Terror", "Thriller"],
+                    "poster": "https://br.web.img3.acsta.net/pictures/17/04/19/21/08/577190.jpg",
+                    "atores": [
+                        {
+                            "nome": "Daniel Kaluuya",
+                            "personagem": "Chris Washington"
+                        },
+                        {
+                            "nome": "   Allison Williams     ",
+                            "personagem": " Rose Armitage   "
+                        }
+                    ],
+                    "lancamento": 2017,
+                },
+                {
+                    "titulo": " Sorria ",
+                    "diretor": " Parker Finn ",
+                    "genero": ["Terror psicológico", "Terror"],
+                    "atores": [
+                        {
+                            "nome": " Sosie Bacon ",
+                            "personagem": " Rose Cotter"
+                        },
+                        {
+                            "nome": " Kyle Gallner ",
+                            "personagem": " Joel "
+                        }
+                    ],
+                    "lancamento": 2022,
+                    "poster": "https://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/sorria_poster_filme_b.jpg?itok=6D-_Yd6x",
+                },
+                {
+                    "titulo": "Homem-Aranha: Sem Volta para Casa",
+                    "diretor": "Jon Watts",
+                    "genero": [" Ação", "Ficção científica"],
+                    "atores": [
+                        {
+                            "nome": " Tom Holland ",
+                            "personagem": " Homem-Aranha "
+                        },
+                        {
+                            "nome": " Zendaya ",
+                            "personagem": " Michelle Jones "
+                        }
+                    ],
+                    "lancamento": 2021,
+                    "poster": "https://img.elo7.com.br/product/original/3E882CA/big-poster-filme-homem-aranha-sem-volta-para-casa-90x60-cm-1-poster-geek.jpg",
+                },
+            ],
+        };
+
+        const filmesLista = document.getElementById("filmes-lista");
+
+        filmesData.filmesFavoritos.forEach(filme => {
+            const listItem = document.createElement("li");
+            let anoReferencia = new Date().getFullYear();
+            const idadeDoFilme = anoReferencia - filme.lancamento;
+            filme.idadeDoFilme = idadeDoFilme;
+
+            listItem.innerHTML = `
+            <div id =conteiner>
+                <h2>${filme.titulo}</h2>
+
+                <p><strong>Diretor:</strong> ${filme.diretor}</p>
+                <p><strong>Gênero:</strong> ${filme.genero.join(", ")}</p>
+                <p><strong>Atores:</strong></p>
+                <div id= atores>
+                    ${filme.atores
+                    .map(
+                        ator =>
+                            `<li> ${ator.nome}  <br>   com <br> ${ator.personagem} </li>`
+                    )
+                    .join("")}
+                </div>
+                <p><strong>Ano de Lançamento:</strong> ${filme.lancamento}</p>
+             
+                <p><strong>Idade do Filme:</strong> ${filme.idadeDoFilme} anos</p>
+                <img src="${filme.poster}" alt="${filme.titulo} Poster">
+                </div>
+            `;
+            filmesLista.appendChild(listItem);
+        });
+    </script>
+</body>
+
+</html>
